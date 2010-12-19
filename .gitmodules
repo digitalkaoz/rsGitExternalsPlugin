@@ -1,6 +1,3 @@
-[submodule "php-git-repo"]
-	path = php-git-repo
-	url = git://github.com/ornicar/php-git-repo.git
 [submodule "lib/vendor/php-git-repo"]
 	path = lib/vendor/php-git-repo
 	url = git://github.com/ornicar/php-git-repo.git

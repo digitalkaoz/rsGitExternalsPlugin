@@ -1,4 +1,7 @@
 <?php
+
+require_once dirname(__FILE__).'/../vendor/php-git-repo/lib/phpGitRepo.php';
+require_once dirname(__FILE__).'/../vendor/php-git-repo/lib/phpGitRepoCommand.php';
 /**
  * @author robert schoenthal
  */
@@ -31,6 +34,8 @@ EOF;
 
   protected function execute($arguments = array(), $options = array())
   {
+    $this->grepExternals();
+    
     switch($arguments['command'])
     {
       case 'pull' : $this->pullExternals();break;
@@ -41,12 +46,30 @@ EOF;
   
   protected function pullExternals()
   {
-    $this->grepExternals();
+    foreach($this->externals as $name=>$external)
+    {
+      if(!is_dir($external['local']))
+      {
+        $this->logSection('git', sprintf('folder not found, cloning [%s]',$name));
+      }
+      else
+      {
+        if(file_exists($external['local'].DIRECTORY_SEPARATOR.'.svn'))
+        {
+          $this->logSection('git', sprintf('folder found but seems to be a svn repo [%s]',$name),null,'ERROR');
+        }
+        else
+        {
+          $this->logSection('git', sprintf('folder found, pulling [%s]',$name));
+          $repo = new phpGitRepo($external['local']);
+          $repo->git('pull master');
+        }
+      }
+    }
   }
   
   protected function pushExternals()
   {
-    $this->grepExternals();
   }
   
   protected function grepExternals()
@@ -67,10 +90,8 @@ EOF;
         $external = preg_split('/\s+/', $external);
         $path = substr($file, 0,  strripos($file, DIRECTORY_SEPARATOR)+1).$external[0];
         
-        $this->externals[$external[0]] = array('local_location'=>$path,'git_location'=>$external[1]);
+        $this->externals[$external[0]] = array('local'=>$path,'git'=>$external[1]);
       }
     }
-    
-    var_dump($this->externals);
   }
 }
