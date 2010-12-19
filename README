@@ -1,0 +1,27 @@
+# RsGitExternalsPlugin
+
+*manage symfony plugins hosted with git*
+
+create files named *.gitexternals* in your symfony project:
+
+**plugins/.gitexternals**
+    
+    rsGitExternalsPlugin        git://github.com/digitalkaoz/rsGitExternalsPlugin.git
+
+after installing this plugin (with, git, svn or pear, its up to you ;) ), you have a new task.
+
+    symfony plugin:git-externals
+
+pulling and cloning
+   
+    symfony plugin:git-externals pull
+
+pushing
+   
+    symfony plugin:git-externals push
+
+##TODO
+  
+  - tests   
+  - commit   
+  - status
