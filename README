@@ -4,7 +4,6 @@ RsGitExternalsPlugin
 *manage symfony plugins hosted on git*
 (or any other git repository you need in your project)
 
-
 Installation
 ------------
 
@@ -22,7 +21,6 @@ Installation
 
 *activate plugin*
 
-
 Configuration
 -------------
 
@@ -31,7 +29,6 @@ create files named *.gitexternals* in your symfony project:
 **plugins/.gitexternals**
     
     rsGitExternalsPlugin        git://github.com/digitalkaoz/rsGitExternalsPlugin.git
-
 
 Usage
 -----
@@ -47,7 +44,6 @@ Usage
 **status**
    
     symfony plugin:git-externals status
-
 
 TODO
 ----
