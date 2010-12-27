@@ -168,7 +168,7 @@ class GitExternalsManager
       {
         case 'clone' :
           mkdir($path);
-          $repo = $class::create($path);
+          $repo = call_user_func(array($class,'create'), $path);
           $repo->git('remote add origin '.substr($command,strpos($command, ' ')+1));
           $repo->git('pull origin master');
           break;
